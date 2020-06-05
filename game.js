@@ -230,7 +230,7 @@ function draw(){
     }
     
     pen.fillStyle = "white";
-    pen.fillText("Score "+player.health,10,10);
+    pen.fillText("Score "+player.health+"                                  press mouse to move forward                 keep Sounds On",13,13);
     
 }
 
