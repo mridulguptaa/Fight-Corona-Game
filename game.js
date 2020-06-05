@@ -1,18 +1,16 @@
 function load_images(){
     //player,virus,gem
     enemy_image = new Image;
-    enemy_image.src = "Assets/v2.png";
+    enemy_image.src = "v2.png";
     
     player_img = new Image;
-    player_img.src = "Assets/M7.png";
+    player_img.src = "M7.png";
     
     gem_image = new Image;
-    gem_image.src = "Assets/m6.png";
+    gem_image.src = "M6.png";
 
     heart_image = new Image;
-    heart_image.src = "Assets/h2.png";
-    
-    
+    heart_image.src = "h2.png";
 }
 
 
