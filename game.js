@@ -13,6 +13,20 @@ function load_images(){
     heart_image.src = "h2.png";
 }
 
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }    
+}
 
 function init(){
     //define the objects that we will have in the game
@@ -29,7 +43,12 @@ function init(){
     console.log(pen);
     game_over = false;
     win = false;
-    
+    sound1 = new sound("start2.mp3");
+    sound2 = new sound("win.mp3");
+    sound3 = new sound("lose.mp3");
+
+    flag = false;
+
     e1 = {
 		x : 150,
 		y : 50,
@@ -166,6 +185,12 @@ function init(){
     canvas.addEventListener('mousedown',function(){
         console.log("Mouse Pressed"); 
         player.moving = true;
+        if(flag==false){
+        	sound1.play();
+        	console.log("sound1 play");	
+        } 
+        flag=true;
+
     });
     canvas.addEventListener('mouseup',function(){
         console.log("Mouse Released"); 
@@ -219,12 +244,23 @@ function update(){
     
     for(let i=0;i<enemy.length;i++){
         if(isOverlap(enemy[i],player,0)){
-            player.health -= 50;
-            if(player.health <0){
+            player.health = 0;
+            if(player.health == 0){
                 console.log(player.health);
-                game_over = true;
-                alert("Game Over" + player.health);
-                exit();
+                //sound1.stop();
+                sound3.play();
+
+                //send player back to original place.
+
+                //sound1.play();
+                player.x = 20;
+                player.y = H/2;
+                player.health = 100;
+
+                // game_over = true;
+                // alert("Game Over" + player.health + "   Refresh Page to Play Again");
+                // exit();
+                //return;
             }
         }
     }
@@ -235,7 +271,9 @@ function update(){
     	pen.drawImage(heart_image,heart.x,heart.y,heart.w,heart.h);
     	
         console.log("You Won");
-        win - true;
+        win = true;
+        sound1.stop();
+        sound2.play();
         game_over = true;        
     }
     
